@@ -1,0 +1,17 @@
+"""
+Should I express tree search generally or more specialized (depth first, best first, etc)?
+Where are the decision points?
+How do you make the system hardwire a few decisions?
+
+
+"""
+
+
+def DepthFirst(fs): #fs fulfills protocol FormalState
+    if fs.points(): return fs.points()
+    fs.visit()
+    if fs.finished(): return fs
+    paths = fs.getPaths() #return sorted if possible
+
+    for path in paths:
+        Search(fs.transform(path))

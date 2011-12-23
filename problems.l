@@ -21,7 +21,7 @@
 		 (and (< n 1000000000) (> n 900000000))))
 
  (cross (lambda (x y n)
-	  (if (>= x y) (equal? n 0)
+	  (if (>= x y) (eq? n 0)
 	    (cross (+ x 10) (+ y 7) (- n 1)))))
 
 ;basic mathematical rules (law of distribution, power laws, associativity, reflectivity, commutativity)
