@@ -1,0 +1,20 @@
+1) Läs igenom bloggposten igen
+
+2) Skapa en konkret uppgift, som man kan lösa bättre genom att bevisa bort en del av sökrymden.
+   Förmodligen en avsökning av ett sökträd, eller en uppräkning av en sökrymd. Ett bevis är en sorts trädsökning,
+   så det är väl lämpligt att själva problemet också är en trädsökning.
+
+3) Gör och kör algoritmer som kan kombinera bevis med diskret sök för att lösa uppgiften. Bevisningen ska kunna dra igång metabevisningar. Lös problemet med liknande problem och kortslutning av beslutspunkter på något pragmatiskt sätt.
+
+4) Förbättra systemet genom att lägga på parameteroptimering (GA).
+   Modifiera ev. problemet, eller skapa nya problem, så att det finns en anledning att använda GA.
+
+5) Förbättra systemet genom att lägga på statistik, enligt 4.
+
+Efter detta finns en hel rad intressanta fortsättningar som man kan drömma om. T.ex:
+- Skapa alternativa algoritmer som kan lösa samma problem som en redan existerande algoritm. (GA/NN)
+- Lägg till uppräkning
+- Ett sätt att lösa problem är att konvertera dem från t.ex trädsökning till GA. Lär systemet att göra det.
+- Lär systemet/låt det lära sig när olika algoritmer är lämpliga
+- Uppgifter med slump
+- Spel med motståndare

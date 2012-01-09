@@ -1,11 +1,15 @@
 """
+An even simpler approach than tree search is enumerating all possible solutions, i.e bruteforcing.
+"""
+
+"""
 Tree search:
 
 If structure is possibly a graph, results can be cached. What if cache is too large for memory?
 Sometimes it can be immediately proven that tree is not a graph, thus no caching necessary.
 
 Visit could be delayed and tried in som better order, if expensive.
-Visit could be a fuzzy concept (perhaps optimizing), where you could choose how "long" you want
+Visit could be a fuzzy concept (perhaps optimizing), where you could choose for how "long" you want
 to visit a node.
 
 Paths can be sorted.
@@ -32,16 +36,18 @@ Are there any parameters?
 
 def DepthFirst(fs): #fs fulfills protocol FormalState (visit, finished, getNodes, score, transform)
     fs.visit()
-    if fs.finished(): return fs
-    nodes = fs.getNodes()
-
     bestscore = fs.score()
     bestfs = fs
+    if fs.finished(): return bestscore, bestfs
+
+    paths = fs.getNodes()
+
     for path in paths:
         score, newfs = Search(fs.transform(path))
         if score > bestscore:
             bestscore = score
             bestfs = newfs
+
     return bestscore, bestfs
 
 
@@ -86,7 +92,7 @@ def GA(task, solutionPool):
 
 #proofs
 """
-I also need an algorithm/algorithms for enumerating search space from proofs that limit search space.
+I also need an algorithm/algorithms for enumerating search space from proofs that limit search space. Perhaps this algorithm is not necessary - I think the proofs should try to take the form of proving that the solution to a new problem, with a smaller or presumably simpler search space, can be transformed to a solution for the original problem. See below.
 """
 
 #statistics (?)
@@ -104,9 +110,9 @@ Most important questions so far seems to be
    thing (or along some other pattern) several times.
    
 2) how not to run almost the same algorithm in a parallell try
-   I need a quick estimate of "coupling" between different (task + algorithm).
+   I need a quick estimate of "coupling" between different (task + algorithm). It is immediately obvious that two different algorithms trying to solve the same task can be coupled, but two different tasks can also be heavily coupled.
 
-3) how to share information, for example between proofs
+3) how to share information, for example "killer moves" in proofs or other tree searches
    Also, where do proofs enter the picture in code above?
 
 
@@ -114,6 +120,8 @@ Most important questions so far seems to be
 4a) How do you prove stuff? (about a search problem in particular)
    Proving stuff will eventually amount to new search problems, but what are the allowed transformations for a FormalState?
    Antag att vi bara pratar om "puzzles" först. Antag också att dessa har regler för hur lösningen ska se ut och eventuellt vilka transformationer som får lov att göras på ett state för att komma dit.
+
+   Detta kanske alltid har varit uppenbart för mig, men... Ett puzzle är ju egentligen ett formellt system där varje state är en sats och du oftast försöker bevisa att en viss sats är sann.
 
    Antag att man ska ta reda på om något begynnelsedrag forcerar vinst i tic-tac-toe, då behöver man av symmetriskäl bara titta på tre stycken. Hur visar man det? I just det fallet har det med symmetrisk spelplan och rotationer och speglingar att göra. Generellt så handlar det mer om att visa att två states är ekvivalenta. Det förenklar om man bara har några fördefinierade "teorier" om vilka ekvivalenser/symmetrier som finns och när de kan finnas. Men det förtråkar också.
 
